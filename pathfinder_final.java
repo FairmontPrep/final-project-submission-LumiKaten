@@ -1,33 +1,22 @@
 import java.util.*;
 
 public class pathfinder_final {
-    // ======== INPUT 2D ARRAY MAP =========
-    // Replace the numbers in this 2D array to test different maps.
-    // Use 1 for path, 0 for empty space, and any other number for distraction/noise.
-    // Path must start and end on a wall and contain at least one 90-degree turn.
-    static int[][] A = {
-        // EXAMPLE PATH:
-        // {1, 0, 0, 0},
-        // {1, 0, 0, 0},
-        // {1, 1, 1, 1},
-        // {0, 0, 0, 1}
-
-        // EMPTY TEMPLATE TO FILL IN:
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    };
-
+    static int[][] A;
     static boolean[][] visited;
     static ArrayList<String> path;
 
-    public static void main(String[] args) {
+    public static void setMap(int[][] map) {
+        A = map;
+    }
+
+    public static void findPath() {
         visited = new boolean[A.length][A[0].length];
         path = new ArrayList<>();
 
         if (searchFromEdges()) {
-            System.out.println("Path: " + path);
+            System.out.println("Path coordinates:");
+            System.out.println(path);
+            System.out.println("Formatted Path Map:");
             printPathMap();
         } else {
             System.out.println("No valid path found.");
@@ -84,7 +73,7 @@ public class pathfinder_final {
                 if (path.contains(coord)) {
                     System.out.print(" 1 ");
                 } else {
-                    System.out.print("   ");
+                    System.out.print(" . ");
                 }
             }
             System.out.println();
